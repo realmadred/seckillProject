@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seckill.dao.SeckillDao">
+
+    <sql id="fields" >
+        id,name,price,number,starttime,endtime
+    </sql>
+
+    <select id="getSeckill" parameterType="int" resultType="com.seckill.entity.Seckill">
+        SELECT
+          <include refid="fields"></include>
+        FROM seckill
+        WHERE id=#{id};
+    </select>
+
+    <select id="getAll" resultType="com.seckill.entity.Seckill">
+        SELECT
+          <include refid="fields"></include>
+        FROM seckill
+        Where endtime > now()
+    </select>
+
+    <update id="descSeckillNumber" parameterType="int">
+      UPDATE seckill set number = number-1
+      WHERE number > 0
+      AND id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - seckill@localhost" uuid="05be40ff-0a1f-4eac-a7f2-d0ad2733d05b">
+    <database-info product="MySQL" version="5.1.73-community-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.38 ( Revision: fe541c166cec739c74cc727c5da96c1028b4834a )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="seckill"/>
+      <table id="2" parent="1" name="seckill"/>
+      <table id="3" parent="1" name="seckillsuccess"/>
+      <column id="4" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="5" parent="2" name="name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="6" parent="2" name="price">
+        <data-type>float</data-type>
+      </column>
+      <column id="7" parent="2" name="number">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="8" parent="2" name="starttime">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="9" parent="2" name="endtime">
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+      </column>
+      <index id="10" parent="2" name="seckill_endTime_index">
+        <columns>endtime</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="11" parent="2" name="seckill_startTime_index">
+        <columns>starttime</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="12" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="13" parent="3" name="id">
+        <comment>主键</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="14" parent="3" name="seckill_id">
+        <comment>秒杀商品的id</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="15" parent="3" name="phone">
+        <comment>电话号码</comment>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="16" parent="3" name="secTime">
+        <comment>秒杀时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <column id="17" parent="3" name="state">
+        <comment>秒杀的状态 0 成功 1 失败 2 结束</comment>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <index id="18" parent="3" name="seckillsuccess_id_phone_index">
+        <columns>seckill_id
+phone</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="19" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>

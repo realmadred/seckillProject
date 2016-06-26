@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+      xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <!-- Spring事务管理（基于注解） -->
+    <bean id="txMananger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds"/>
+    </bean>
+
+    <!-- 组件扫描 -->
+    <context:component-scan base-package="com.seckill.sevice.impl"/>
+
+    <!-- 开启对@Transaction的支持 -->
+    <tx:annotation-driven transaction-manager="txMananger"/>
+
+    <!-- 使用注解的AOP -->
+
+    <!-- 1 利用组件扫描将切面组件纳入到容器管理@Component -->
+
+    <!-- 2 开启AOP的注解支持 @Aspect @Before ..-->
+    <aop:aspectj-autoproxy/>
+</beans>

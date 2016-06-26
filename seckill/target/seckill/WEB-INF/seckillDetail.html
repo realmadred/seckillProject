@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang=zh_cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>秒杀详情页</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.css" rel="stylesheet">-->
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="http://v4-alpha.getbootstrap.com/assets/js/vendor/tether.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/seckillDetal.js"></script>
+    <script>
+    </script>
+    <style>
+        #counDown{
+            text-align: center;
+            font-size: 30px;
+        }
+        table, th ,div{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron ">
+        <h1>秒杀商品详情</h1>
+        <div>
+            <a id="counDown" class='btn btn-primary'></a>
+        </div>
+    </div>
+    <div class="panel panel-warning">
+        <div class="panel-body bg-success">
+            <h2 id="detail1"></h2>
+        </div>
+        <div class="panel-body bg-warning">
+            <h2 id="detail2"></h2>
+        </div>
+    </div>
+    <div id="excute_div">
+
+    </div>
+
+
+    <!--模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">输入手机号码</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <span id="span_msg"></span>
+                    </p>
+                    <input type="text" class="form-control" id="input_phone">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="save_model">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

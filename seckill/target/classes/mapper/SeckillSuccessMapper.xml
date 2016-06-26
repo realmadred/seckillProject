@@ -1,0 +1,69 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seckill.dao.SeckillSuccessDao">
+
+    <sql id="fields" >
+        ss.id,ss.seckill_id,ss.phone,ss.secTime,ss.state,
+        s.id, s.name, s.price, s.number, s.starttime, s.endtime
+    </sql>
+
+    <sql id="leftJoin_sql" >
+        FROM seckillsuccess ss
+        LEFT JOIN seckill s
+        ON ss.seckill_id = s.id
+    </sql>
+
+    <!--结果映射-->
+    <resultMap id="seckillMap" type="com.seckill.entity.SeckillSuccess">
+        <id property="id" column="id"></id>
+        <result property="phone" column="phone"></result>
+        <result property="secTime" column="secTime"></result>
+        <result property="state" column="state"></result>
+        <!--关联属性多对一-->
+        <association property="seckill" javaType="com.seckill.entity.Seckill">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+            <result property="price" column="price"></result>
+            <result property="number" column="number"></result>
+            <result property="starttime" column="starttime"></result>
+            <result property="endtime" column="endtime"></result>
+        </association>
+    </resultMap>
+
+    <select id="getSeckillSuccess" parameterType="int" resultMap="seckillMap" useCache="true">
+        SELECT
+          <include refid="fields"></include>
+          <include refid="leftJoin_sql"></include>
+        WHERE ss.id=#{id}
+    </select>
+
+    <select id="getAll" resultMap="seckillMap" useCache="true">
+        SELECT
+          <include refid="fields"></include>
+          <include refid="leftJoin_sql"></include>
+    </select>
+
+    <select id="getByPhoneAndSeckillId" resultMap="seckillMap" useCache="true">
+        SELECT
+          <include refid="fields" ></include>
+          <include refid="leftJoin_sql"></include>
+        WHERE ss.seckill_id = #{seckill_id}
+        AND ss.phone = #{phone}
+    </select>
+
+    <!--保存-->
+    <insert id="save" >
+        INSERT INTO seckillsuccess(seckill_id,phone,secTime,state)
+        VALUES (#{seckill_id},#{phone},#{secTime},#{state})
+    </insert>
+
+    <select id="seckillProcedure" statementType="CALLABLE">
+        CALL excute_seckill(
+        #{seckill_id,jdbcType=BIGINT,mode = IN},
+        #{phone,jdbcType=VARCHAR,mode = IN},
+        #{secTime,jdbcType=TIMESTAMP,mode = IN},
+        #{result,jdbcType=BIGINT,mode = OUT} )
+    </select>
+</mapper>
